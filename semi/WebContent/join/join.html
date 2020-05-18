@@ -39,14 +39,14 @@
 		}
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=idCheckok;
-		xhr.open('get','/semiProject1/idcheck.do?id='+id,true);
+		xhr.open('get','/semi/idcheck.do?id='+id,true);
 		xhr.send();
 		return false;
 	}
 	
 	function idCheckok(){
 		if(xhr.readyState==4 && xhr.status==200){
-			var xml=xhr.responseXML;
+			var xml=xhr.responseXML;   
 			var using=xml.getElementsByTagName("using")[0].firstChild.nodeValue;
 			var ckstr=xml.getElementsByTagName("ckstr")[0].firstChild.nodeValue;
 			//아이디 범위 체크 진행
@@ -109,7 +109,7 @@
 </script>
 </head>
 <body>
-	<form action="/semiProject1/joinOk.do" method="post">
+	<form action="/semi/joinOk.do" method="post">
 		<div class="join_row_id">
 		<h3 class="join_title"><label for="id">아이디 </label></h3>
 			<input type="text" id="id" name="id"> &nbsp;

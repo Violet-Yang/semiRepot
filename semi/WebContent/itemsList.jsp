@@ -94,9 +94,9 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;pad
 <!-- button -->
 
 <div id="btn_group"> 
-	<button id="test_btn1">테스트1</button> 
-	<button id="test_btn2">테스트2</button>
-	<button id="test_btn3">테스트3</button>
+	<a href="${cp}/itemSelete?pageNum=1&pre_categoryNum=${pre_categoryNum}&main_categoryNum=${main_categoryNum}&selectNum=1"><button id="test_btn1">상품명순</button></a>
+	<a href="${cp}/itemSelete?pageNum=1&pre_categoryNum=${pre_categoryNum}&main_categoryNum=${main_categoryNum}&selectNum=2"><button id="test_btn2">높은가격순</button></a>
+	<a href="${cp}/itemSelete?pageNum=1&pre_categoryNum=${pre_categoryNum}&main_categoryNum=${main_categoryNum}&selectNum=3"><button id="test_btn3">낮은가격순</button></a>
 </div>
 
 
