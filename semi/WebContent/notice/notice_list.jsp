@@ -4,9 +4,9 @@
 <a href="${cp }/notice/notice_insert">글쓰기</a>
 <table border="1">
 	<colgroup>
-		<col width="15%">
-		<col width="20%">
-		<col width="65%">
+		<col width="75">
+		<col width="150">
+		<col width="1170">
 	</colgroup>
 	<thead>
 		<tr>
