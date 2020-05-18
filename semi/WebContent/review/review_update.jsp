@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>REVIEW</title>
-</head>
-<body>
-	<form method="post" action="${pageContext.request.contextPath }/review/review_update">
+	pageEncoding="UTF-8"%>
+<form method="post" action="${pageContext.request.contextPath }/review/review_update">
 		<input type="hidden" name="review_num" value="${vo.review_num }">
 		상품번호(db) <br>
 		<input type="text" name="items_num" value="${vo.items_num }" readonly="readonly"> <br>
@@ -20,6 +13,4 @@
 		<br>
 		<input type="submit" value="수정">
 		<input type="reset" value="취소">
-	</form>
-</body>
-</html>
+</form>

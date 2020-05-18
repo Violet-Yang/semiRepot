@@ -3,13 +3,11 @@
 <div id="wrap">
 	<div id="mainwrap">
 		<div id="main">
-			<a href="${cp }/review/review_list">목록</a> <a
-				href="${cp }/review/review_update?review_num=${vo.review_num}">수정</a>
-			<a href="${cp }/review/review_delete?review_num=${vo.review_num}">삭제</a>
+			<a href="${cp }/review/review_list">목록</a>
 			<table border="1">
 				<colgroup>
 					<col width="130">
-					<col width="*">
+					<col width="800">
 				</colgroup>
 				<tbody>
 					<tr>
@@ -26,6 +24,8 @@
 					</tr>
 				</tbody>
 			</table>
+			<a href="${cp }/review/review_update?review_num=${vo.review_num}">수정</a>
+			<a href="${cp }/review/review_delete?review_num=${vo.review_num}">삭제</a>
 		</div>
 	</div>
 </div>

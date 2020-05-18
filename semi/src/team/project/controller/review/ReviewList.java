@@ -27,16 +27,20 @@ public class ReviewList extends HttpServlet {
 		ArrayList<ReviewVo> list = dao.list(startRow, endRow);
 
 		int pageCount = (int) Math.ceil(dao.getCount() / 10.0);
-		int startPageNum = ((pageNum - 1) / 10) * 10 + 1;
-		int endPageNum = startPageNum + 9;
+		int startPageNum = ((pageNum - 1) / 3) * 3 + 1;
+		int endPageNum = startPageNum + 2;
 
 		if (pageCount < endPageNum)
 			endPageNum = pageCount;
+
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("list", list);
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);
-		req.getRequestDispatcher("/review/review_list.jsp").forward(req, resp);
+		req.setAttribute("top", "/top.jsp");
+		req.setAttribute("main", "/review/review_list.jsp");
+		req.setAttribute("bot", "/bottom.jsp");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 }

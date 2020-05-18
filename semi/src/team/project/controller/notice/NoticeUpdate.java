@@ -19,7 +19,10 @@ public class NoticeUpdate extends HttpServlet {
 		NoticeDao dao = new NoticeDao();
 		NoticeVo vo = dao.getinfo(notice_num);
 		req.setAttribute("vo", vo);
-		req.getRequestDispatcher("/notice/notice_update.jsp").forward(req, resp);
+		req.setAttribute("top", "/top.jsp");
+		req.setAttribute("main", "/notice/notice_update.jsp");
+		req.setAttribute("bot", "/bottom.jsp");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 
 	@Override
@@ -36,6 +39,9 @@ public class NoticeUpdate extends HttpServlet {
 		if (n <= 0)
 			result = "fail";
 		req.setAttribute("result", result);
-		req.getRequestDispatcher("/notice/notice_result.jsp").forward(req, resp);
+		req.setAttribute("top", "/top.jsp");
+		req.setAttribute("main", "/notice/notice_result.jsp");
+		req.setAttribute("bot", "/bottom.jsp");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 }

@@ -10,14 +10,14 @@ import team.project.db.util.JDBCUtil;
 import team.project.vo.NoticeVo;
 
 public class NoticeDao {
-	// 가장 큰 글번호 (페이징처리)
+	// 글목록의 개수 (페이징처리)
 	public int getCount() {
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
 			con = JDBCUtil.getConn();
-			String sql = "select NVL(max(notice_num), 0) cnt from notice";
+			String sql = "select NVL(count(*), 0) cnt from notice";
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			if (rs.next()) {

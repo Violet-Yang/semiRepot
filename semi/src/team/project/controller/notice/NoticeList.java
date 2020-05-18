@@ -27,8 +27,8 @@ public class NoticeList extends HttpServlet {
 		ArrayList<NoticeVo> list = dao.list(startRow, endRow);
 
 		int pageCount = (int) Math.ceil(dao.getCount() / 10.0);
-		int startPageNum = ((pageNum - 1) / 10) * 10 + 1;
-		int endPageNum = startPageNum + 9;
+		int startPageNum = ((pageNum - 1) / 3) * 3 + 1;
+		int endPageNum = startPageNum + 2;
 		if (pageCount < endPageNum)
 			endPageNum = pageCount;
 

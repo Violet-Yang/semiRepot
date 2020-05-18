@@ -13,14 +13,14 @@ import team.project.vo.NoticeVo;
 import team.project.vo.ReviewVo;
 
 public class ReviewDao {
-	// 가장 큰 글번호 (페이징처리)
+	// 글목록의 개수 (페이징처리)
 	public int getCount() {
 		Connection con = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
 			con = JDBCUtil.getConn();
-			String sql = "select NVL(max(review_num), 0) cnt from review";
+			String sql = "select NVL(count(*), 0) cnt from review";
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
 			if (rs.next()) {
@@ -78,7 +78,7 @@ public class ReviewDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
-		}finally {
+		} finally {
 			JDBCUtil.close(rs, pst, con);
 		}
 	}
@@ -185,18 +185,35 @@ public class ReviewDao {
 	// 삭제
 	public int delete(int review_num) {
 		Connection con = null;
-		PreparedStatement pst = null;
+		PreparedStatement pst1 = null;
+		PreparedStatement pst2 = null;
 		try {
 			con = JDBCUtil.getConn();
-			String sql = "delete from review where review_num=?";
-			pst = con.prepareStatement(sql);
-			pst.setInt(1, review_num);
-			return pst.executeUpdate();
+			// 자식 테이블
+			String sql1 = "delete from review_img where review_num=?";
+			pst1 = con.prepareStatement(sql1);
+			pst1.setInt(1, review_num);
+			pst1.executeUpdate();
+
+			// 부모 테이블
+			String sql2 = "delete from review where review_num=?";
+			pst2 = con.prepareStatement(sql2);
+			pst2.setInt(1, review_num);
+			return pst2.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return -1;
 		} finally {
-			JDBCUtil.close(null, pst, con);
+			try {
+				if (pst1 != null)
+					pst1.close();
+				if (pst2 != null)
+					pst2.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

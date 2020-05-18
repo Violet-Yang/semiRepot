@@ -3,13 +3,11 @@
 <div id="wrap">
 	<div id="mainwrap">
 		<div id="main">
-			<a href="${cp }/notice/notice_list">목록</a> <a
-				href="${cp }/notice/notice_update?notice_num=${vo.notice_num}">수정</a>
-			<a href="${cp }/notice/notice_delete?notice_num=${vo.notice_num}">삭제</a>
+			<a href="${cp }/notice/notice_list">목록</a>
 			<table border="1">
 				<colgroup>
 					<col width="130">
-					<col width="*">
+					<col width="800">
 				</colgroup>
 				<tbody>
 					<tr>
@@ -26,6 +24,8 @@
 					</tr>
 				</tbody>
 			</table>
+			<a href="${cp }/notice/notice_update?notice_num=${vo.notice_num}">수정</a>
+			<a href="${cp }/notice/notice_delete?notice_num=${vo.notice_num}">삭제</a>
 		</div>
 	</div>
 </div>

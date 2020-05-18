@@ -22,6 +22,9 @@ public class ReviewDetail extends HttpServlet {
 		content = content.replace("\n", "<br>");
 		vo.setContent(content);
 		req.setAttribute("vo", vo);
-		req.getRequestDispatcher("/review/review_detail.jsp").forward(req, resp);
+		req.setAttribute("top", "/top.jsp");
+		req.setAttribute("main", "/review/review_detail.jsp");
+		req.setAttribute("bot", "/bottom.jsp");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 }

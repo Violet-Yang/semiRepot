@@ -19,7 +19,10 @@ public class ReviewUpdate extends HttpServlet {
 		ReviewDao dao = new ReviewDao();
 		ReviewVo vo = dao.getinfo(review_num);
 		req.setAttribute("vo", vo);
-		req.getRequestDispatcher("/review/review_update.jsp").forward(req, resp);
+		req.setAttribute("top", "/top.jsp");
+		req.setAttribute("main", "/review/review_update.jsp");
+		req.setAttribute("bot", "/bottom.jsp");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 
 	@Override
@@ -37,6 +40,9 @@ public class ReviewUpdate extends HttpServlet {
 		if (n <= 0)
 			result = "fail";
 		req.setAttribute("result", result);
-		req.getRequestDispatcher("/review/review_result.jsp").forward(req, resp);
+		req.setAttribute("top", "/top.jsp");
+		req.setAttribute("main", "/review/review_result.jsp");
+		req.setAttribute("bot", "/bottom.jsp");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 }

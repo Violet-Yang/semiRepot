@@ -242,24 +242,14 @@ public class itemsDao {
 		}
 	}
 	
-	public int getCount(int pre_categoryNum,int main_categoryNum) {
+	public int getCount() {
 		Connection con = null;
 		PreparedStatement pstmt=  null;
 		ResultSet rs =null;
 		try {
 			con=JDBCUtil.getConn();
-			if(main_categoryNum!=0) {
-				String sql = "select NVL(count(*),0) cnt from items "
-						+ "where and main_category_num=?";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setInt(1, pre_categoryNum);
-				pstmt.setInt(2, main_categoryNum);
-			}else {
-				String sql = "select NVL(count(i.*),0) cnt from items i, "
-						+ "where pre_category_num=?";
-				pstmt=con.prepareStatement(sql);
-				pstmt.setInt(1, pre_categoryNum);
-			}
+			String sql = "select NVL(count(items_num),0) cnt from items";
+			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt("cnt");
@@ -269,69 +259,6 @@ public class itemsDao {
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
-		}finally {
-			JDBCUtil.close(rs,pstmt,con);
-		}
-	}
-	
-	//post방식으로 들어왔을때(검색)
-	
-	public int pgetCount(String keyword) {
-		Connection con = null;
-		PreparedStatement pstmt=  null;
-		ResultSet rs =null;
-		try {
-			con=JDBCUtil.getConn();
-			String sql="select NVL(count(*),0) from items";
-			if(keyword!=null && !keyword.equals("")) {
-				sql += " where name like '%"+ keyword + "%'";
-			}
-			pstmt=con.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				int cnt=rs.getInt(1);
-				return cnt;
-			}
-			return 0;
-		}catch(SQLException se) {
-			System.out.println(se.getMessage());
-			return -1;
-		}finally {
-			JDBCUtil.close(rs,pstmt,con);
-		}
-	}
-	
-	public ArrayList<itemsVo> pList(int startRow,int endRow,String keyword) {
-		Connection con = null;
-		PreparedStatement pstmt=null;
-		ResultSet rs = null;
-		ArrayList<itemsVo> list = new ArrayList<itemsVo>();
-		try {
-			con = JDBCUtil.getConn();
-			String sql = "select * from" + 		
-					"    (" + 
-					"        select aa.*,rownum rnum from" + 
-					"        (" + 
-					"            select * from items where name like '%"+ keyword + "%'  order by items_num desc" + 
-					"        )aa" + 
-					")where rnum>=? and  rnum<=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				itemsVo vo = new itemsVo(rs.getInt("items_num"),
-						rs.getInt("main_category_num"),
-						rs.getString("name"),
-						rs.getInt("price"),
-						rs.getString("info"),
-						rs.getString("item_date"));
-				list.add(vo);
-			}
-			return list;
-		}catch(SQLException se) {
-			System.out.println(se.getMessage());
-			return null;
 		}finally {
 			JDBCUtil.close(rs,pstmt,con);
 		}

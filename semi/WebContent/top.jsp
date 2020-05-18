@@ -6,36 +6,37 @@
 	<div class="header_top">
 		<div class="left">
 			<ul>
-				<li><a href="${cp }/review/review_home">리뷰게시판</a></li>
-				<li><a href="${cp }/notice/notice_home">공지사항</a></li>
+				<li><a href="${cp }/review/review_list">리뷰게시판</a></li>
+				<li><a href="${cp }/notice/notice_list">공지사항</a></li>
 			</ul>
 		</div>
 		<div class="right">
 			<ul>
 				<c:choose>
-					<c:when test="${sessionScope.usertype=='user'}">
-						<!-- usertype이 user일 때 -->
+					<c:when test="${id!=null}">
+						<!-- 아이디값이 들어왔을때  -->
 						<li><a href="${cp}/logout">LOGOUT</a></li>
-						<li><a href="${cp}/mypage/mypage_memberInfo.jsp">MYPAGE</a></li>
-						<li><a href="">ORDER</a></li>
+						<li><a href="">JOIN</a></li>
+						<c:choose>
+							<c:when test="${a}">
+								<!-- 관리자가 아닌경우(미구현) -->
+								<li><a href="">MYPAGE</a></li>
+								<li><a href="">ORDER</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="${cp}/itemsInsert">상품등록</a></li>
+								<!--아이템 번호 넘기기(미구현) -->
+							</c:otherwise>
+						</c:choose>
 					</c:when>
-
-					<c:when test="${sessionScope.usertype=='admin'}">
-						<!-- usertype이 admin일 때 -->
-						<li><a href="${cp}/logout">LOGOUT</a></li>
-						<li><a href="${cp}/itemsInsert">상품등록</a></li>
-						<!--아이템 번호 넘기기(미구현) -->
-						<li><a href="${cp}/categoryInsert">카테고리등록</a></li>
-					</c:when>
-
 					<c:otherwise>
 						<!-- 비회원 -->
 						<li><a href="${cp}/login.do">LOGIN</a></li>
 						<li><a href="${cp}/joinOk.do">JOIN</a></li>
 						<li><a href="">MYPAGE</a></li>
 						<li><a href="">장바구니</a></li>
-						<!-- 임시 -->
 						<li><a href="${cp}/itemsInsert">상품등록</a></li>
+						<!--아이템 번호 넘기기(미구현) -->
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -109,7 +110,7 @@
 						<li><a class="submenuLink"
 							href="${cp}/itemSelete?pre_categoryNum=6&main_categoryNum=13">백팩</a></li>
 						<li><a class="submenuLink"
-							href="${cp}/itemSelete?pre_categoryNum=6&main_categoryNum=14">크로스백</a></li>
+							href="${cp}/itemSelete?pre_categoryNum=6&main_categoryNum=14">클로스백</a></li>
 						<li><a class="submenuLink"
 							href="${cp}/itemSelete?pre_categoryNum=6&main_categoryNum=15">클러치</a></li>
 					</ul></li>

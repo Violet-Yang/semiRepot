@@ -20,8 +20,8 @@ import team.project.vo.items_imgVo;
 @WebServlet("/itemSelete")
 public class ItemsSelete extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("get 진입");
+	protected void service(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
 		int pre_categoryNum = Integer.parseInt(req.getParameter("pre_categoryNum"));
 		String smain_categoryNum = req.getParameter("main_categoryNum");
 		String spageNum = req.getParameter("pageNum");
@@ -94,7 +94,7 @@ public class ItemsSelete extends HttpServlet {
 			}
 		}
 		
-		int pageCount=(int)Math.ceil(dao.getCount(pre_categoryNum,main_categoryNum)/8.0);//페이지 갯수
+		int pageCount=(int)Math.ceil(dao.getCount()/8.0);//페이지 갯수
 		int startPageNum=((pageNum-1)/5)*5+1;
 		int endPageNum=startPageNum+4;
 		if(pageCount<endPageNum) {
@@ -109,51 +109,6 @@ public class ItemsSelete extends HttpServlet {
 		req.setAttribute("pageNum",pageNum);
 		req.setAttribute("pre_categoryNum",pre_categoryNum);
 		req.setAttribute("main_categoryNum",main_categoryNum);
-		req.setAttribute("top", "/top.jsp");
-		req.setAttribute("main", "/itemsList.jsp");
-		req.setAttribute("bot", "/bottom.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
-	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("post 진입");
-		req.setCharacterEncoding("utf-8");
-		String spageNum = req.getParameter("pageNum");
-		String keyword = req.getParameter("keyword");
-		int pageNum=1;
-		if(spageNum!=null) {
-			pageNum=Integer.parseInt(spageNum);
-		}
-		int startRow=(pageNum-1)*8+1;
-		int endRow=pageNum*8;
-		itemsDao dao = new itemsDao();
-		items_imgDao imgdao = new items_imgDao();
-		ArrayList<itemsTotalVo> totalList = new ArrayList<itemsTotalVo>();
-		ArrayList<itemsVo> itemsList = dao.pList(startRow,endRow,keyword);
-		for(int i=0;i<itemsList.size();i++) {
-			items_imgVo imgvo = imgdao.list(itemsList.get(i).getItems_num());
-			itemsVo vo = itemsList.get(i);
-			itemsTotalVo totalvo = new itemsTotalVo(
-					vo.getItems_num(),vo.getMain_category_num(),
-					vo.getName(),vo.getPrice(),vo.getInfo(),vo.getItem_date(),
-					imgvo.getItems_img_num(),imgvo.getFile_name(),imgvo.getFile_type()
-					);
-			totalList.add(totalvo);
-		}
-		int pageCount=(int)Math.ceil(dao.pgetCount(keyword)/8.0);//페이지 갯수
-		int startPageNum=((pageNum-1)/5)*5+1;
-		int endPageNum=startPageNum+4;
-		if(pageCount<endPageNum) {
-			endPageNum=pageCount;
-		}
-		int pre_categoryNum = 0;
-		req.setAttribute("totalList", totalList);
-		req.setAttribute("pageCount", pageCount);
-		req.setAttribute("startPageNum", startPageNum);
-		req.setAttribute("endPageNum", endPageNum);
-		req.setAttribute("pageNum",pageNum);
-		req.setAttribute("keyword", keyword);
-		req.setAttribute("pre_categoryNum",pre_categoryNum);
 		req.setAttribute("top", "/top.jsp");
 		req.setAttribute("main", "/itemsList.jsp");
 		req.setAttribute("bot", "/bottom.jsp");
