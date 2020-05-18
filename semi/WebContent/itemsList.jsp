@@ -8,6 +8,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
 <style>
 h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 .product-grid{font-family:Raleway,sans-serif;text-align:center;margin-top:30px;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
@@ -40,45 +41,46 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 .product-grid .add-to-cart{color:#000;font-size:13px;font-weight:600}
 @media only screen and (max-width:990px){.product-grid{margin-bottom:30px}
 
-</style>   
-
-<div class="container">
-	<h3 class="h3">신상품 </h3>
-	<div class="row">
-		<c:forEach var = "vo" items="${newtotalList}">
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid">
-                <div class="product-image">
-                    <a href="${cp}/detail.do?itemNum=${vo.items_num}">
-                        <img class="pic-1" src="${cp}/upload/${vo.file_type}">
-                        <img class="pic-2" src="${cp}/upload/${vo.file_type}">
-                    </a>
-                    <ul class="social">
-                        <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
-                    <span class="product-new-label">NEW</span>
-                </div>
-                <ul class="rating">
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star"></li>
-                    <li class="fa fa-star disable"></li>
-                </ul>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">${vo.name}</a></h3>
-                    <div class="price">${vo.price}
-                        <span>${vo.price+4000}</span>
-                    </div>
-                    <div>${vo.info}</div>
-                    <a class="add-to-cart" href="">+ Add To Cart</a>
-                </div>
-            </div>
-        </div>
-		</c:forEach>
+</style>
+<c:if test="${pre_categoryNum>=1}">
+	<div class="container">
+		<h3 class="h3">신상품 </h3>
+		<div class="row">
+			<c:forEach var = "vo" items="${newtotalList}">
+	        <div class="col-md-3 col-sm-6">
+	            <div class="product-grid">
+	                <div class="product-image">
+	                    <a href="${cp}/detail.do?itemNum=${vo.items_num}">
+	                        <img class="pic-1" src="${cp}/upload/${vo.file_type}">
+	                        <img class="pic-2" src="${cp}/upload/${vo.file_type}">
+	                    </a>
+	                    <ul class="social">
+	                        <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+	                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+	                    </ul>
+	                    <span class="product-new-label">NEW</span>
+	                </div>
+	                <ul class="rating">
+	                    <li class="fa fa-star"></li>
+	                    <li class="fa fa-star"></li>
+	                    <li class="fa fa-star"></li>
+	                    <li class="fa fa-star"></li>
+	                    <li class="fa fa-star disable"></li>
+	                </ul>
+	                <div class="product-content">
+	                    <h3 class="title"><a href="#">${vo.name}</a></h3>
+	                    <div class="price">${vo.price}
+	                        <span>${vo.price+4000}</span>
+	                    </div>
+	                    <div>${vo.info}</div>
+	                    <a class="add-to-cart" href="">+ Add To Cart</a>
+	                </div>
+	            </div>
+	        </div>
+			</c:forEach>
+		</div>
 	</div>
-</div>
+</c:if>
 <div class="container">
 	<h3 class="h3">상품목록 </h3>
 	<div class="row">
@@ -125,10 +127,12 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 
 <!-- 페이징 -->
 <div>
+<c:choose>
+<c:when test="${pre_categoryNum>=1}">
 	<c:choose>
 		<c:when test="${startPageNum>5}">
 			<a
-				href="${cp}/itemSelete?pageNum=${startPageNum-1}&pre_categoryNum=${pre_categoryNum}&main_categoryNum=${main_categoryNum}&selectNum=${selectNum}">[이전]</a>
+				href="itemSelete?pageNum=${startPageNum-1}&pre_categoryNum=${pre_categoryNum}&main_categoryNum=${main_categoryNum}&selectNum=${selectNum}">[이전]</a>
 		</c:when>
 		<c:otherwise>
 			이전
@@ -149,4 +153,33 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 			다음
 		</c:otherwise>
 	</c:choose>
+</c:when>
+<c:otherwise>
+	<c:choose>
+		<c:when test="${startPageNum>4}">
+		<form method="post" action="${cp}/itemSelete?pageNum=${startPageNum-1}&keyword=${keyword}">
+			<input type="submit" value="[이전]">
+		</form>
+		</c:when>
+		<c:otherwise>
+			이전
+		</c:otherwise>
+	</c:choose>
+	<c:forEach var="i" begin="${startPageNum}" end="${endPageNum}">
+		<form method="post" action="${cp}/itemSelete?pageNum=${i}&keyword=${keyword}">
+			<input type="submit" value="[${i}]">
+		</form>
+	</c:forEach>
+	<c:choose>
+		<c:when test="${pageCount>endPageNum}">
+		<form method="post" action="${cp}/itemSelete?pageNum=${endPageNum+1}&keyword=${keyword}">
+			<input type="submit" value="[다음]">
+		</form>
+		</c:when>
+		<c:otherwise>
+			다음
+		</c:otherwise>
+	</c:choose>
+</c:otherwise>
+</c:choose>
 </div>
