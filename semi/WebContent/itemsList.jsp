@@ -8,9 +8,10 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!-- button -->
 
 <style>
-h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
+h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;padding-top:100px;}
 .product-grid{font-family:Raleway,sans-serif;text-align:center;margin-top:30px;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
 .product-grid .product-image{position:relative;transition:all .3s ease 0s}
 .product-grid .product-image a{display:block}
@@ -39,6 +40,15 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 .product-grid .price{color:#333;font-size:17px;font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:.6px;margin-bottom:8px;text-align:center;transition:all .3s}
 .product-grid .price span{color:#999;font-size:13px;font-weight:400;text-decoration:line-through;margin-left:3px;display:inline-block}
 .product-grid .add-to-cart{color:#000;font-size:13px;font-weight:600}
+/* 페이징처리 div*/
+
+/* button */
+#test_btn1{ border-top-left-radius: 5px; border-bottom-left-radius: 5px; margin-right:-4px; } 
+#test_btn2{ margin-left:-3px;margin-right:-4px; }
+#test_btn3{ border-top-right-radius: 5px; border-bottom-right-radius: 5px; margin-left:-3px;  }
+#btn_group button{width:150px; border: 1px solid black; background-color: rgba(0,0,0,0); color:gray ; padding: 5px;}
+#btn_group button:hover{ color:white; background-color: skyblue;}
+#btn_group{float:right;margin-top:30px;margin-bottom:30px;}
 @media only screen and (max-width:990px){.product-grid{margin-bottom:30px}
 
 </style>
@@ -81,6 +91,15 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 		</div>
 	</div>
 </c:if>
+<!-- button -->
+
+<div id="btn_group"> 
+	<button id="test_btn1">테스트1</button> 
+	<button id="test_btn2">테스트2</button>
+	<button id="test_btn3">테스트3</button>
+</div>
+
+
 <div class="container">
 	<h3 class="h3">상품목록 </h3>
 	<div class="row">
@@ -121,12 +140,8 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 </div>
 
 
-
-
-
-
 <!-- 페이징 -->
-<div>
+<div id="paging">
 <c:choose>
 <c:when test="${pre_categoryNum>=1}">
 	<c:choose>

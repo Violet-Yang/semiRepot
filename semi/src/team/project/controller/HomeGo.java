@@ -19,7 +19,7 @@ public class HomeGo extends HttpServlet {
 		String contextPath = req.getContextPath();
 		ServletContext application = req.getServletContext();
 		application.setAttribute("cp", contextPath);    
-		if(top==null) {
+		if(top==null) { 
 			top = "/top.jsp";
 		}
 		if(main==null) {

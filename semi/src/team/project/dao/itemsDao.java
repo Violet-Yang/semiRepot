@@ -250,13 +250,12 @@ public class itemsDao {
 			con=JDBCUtil.getConn();
 			if(main_categoryNum!=0) {
 				String sql = "select NVL(count(*),0) cnt from items "
-						+ "where and main_category_num=?";
+						+ "where main_category_num=?";
 				pstmt=con.prepareStatement(sql);
-				pstmt.setInt(1, pre_categoryNum);
-				pstmt.setInt(2, main_categoryNum);
+				pstmt.setInt(1, main_categoryNum);
 			}else {
-				String sql = "select NVL(count(i.*),0) cnt from items i, "
-						+ "where pre_category_num=?";
+				String sql = "select NVL(count(*),0) cnt from items i,main_category m \r\n" + 
+						"   where m.pre_category_num=? and i.main_category_num = m.main_category_num";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setInt(1, pre_categoryNum);
 			}
