@@ -22,7 +22,7 @@ input:focus {
 
 #main {
 	width: 100%;
-	height: 85%;
+	height: auto;
 }
 
 #bottom {

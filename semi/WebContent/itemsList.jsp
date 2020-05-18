@@ -90,14 +90,13 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;pad
 			</c:forEach>
 		</div>
 	</div>
-</c:if>
-<!-- button -->
-
-<div id="btn_group"> 
+	<div id="btn_group"> 
 	<a href="${cp}/itemSelete?pageNum=1&pre_categoryNum=${pre_categoryNum}&main_categoryNum=${main_categoryNum}&selectNum=1"><button id="test_btn1">상품명순</button></a>
 	<a href="${cp}/itemSelete?pageNum=1&pre_categoryNum=${pre_categoryNum}&main_categoryNum=${main_categoryNum}&selectNum=2"><button id="test_btn2">높은가격순</button></a>
 	<a href="${cp}/itemSelete?pageNum=1&pre_categoryNum=${pre_categoryNum}&main_categoryNum=${main_categoryNum}&selectNum=3"><button id="test_btn3">낮은가격순</button></a>
 </div>
+</c:if>
+<!-- button -->
 
 
 <div class="container">
