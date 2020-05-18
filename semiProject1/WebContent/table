@@ -1,0 +1,231 @@
+drop SEQUENCE pre_category_seq;
+drop SEQUENCE main_category_seq;
+drop SEQUENCE items_seq;
+drop SEQUENCE detail_img_seq;
+drop SEQUENCE review_seq;
+drop SEQUENCE review_img_seq;
+drop SEQUENCE review_comment_seq;
+drop SEQUENCE cart_seq;
+drop SEQUENCE orders_seq;
+drop SEQUENCE items_img_seq;
+drop SEQUENCE order_detail_seq;
+drop SEQUENCE item_option_seq;
+drop SEQUENCE sub_option_seq;
+drop SEQUENCE notice_seq;
+
+drop table orders_detail;
+drop table orders;
+drop table cash;
+drop table notice;
+drop table review_comment;
+drop table review_img;
+drop table review;
+drop table detail_img;
+drop table items_img;
+drop table cart;
+drop table sub_option;
+drop table item_option;
+drop table items;
+drop table main_category;
+drop table pre_category;
+drop table member;
+
+create table member
+(
+    id varchar2(20) primary key,
+    pwd varchar2(15) not null,
+    name varchar2(15),
+    addr varchar2(50),
+    date_of_birth number(10),
+    phone number(11),
+    gender varchar2(10),
+    email varchar2(30),
+    regdate varchar2(20),
+    usertype varchar2(15)
+);
+create table cash
+(
+    cash_num number(5) primary key,
+    id varchar2(20),
+    cash number(10),
+    point number(10),
+    CONSTRAINT cash_member_FK FOREIGN KEY(id)
+         REFERENCES member(id)
+);
+
+create table pre_category
+(
+    pre_category_num number(5) primary key,
+    name varchar2(20)
+);
+
+create table main_category
+(
+    main_category_num number(5) primary key,
+    pre_category_num number(5),
+    name varchar2(15),
+    CONSTRAINT main_category_FK 
+    FOREIGN KEY(pre_category_num)
+         REFERENCES pre_category(pre_category_num)
+);
+
+create table items
+(
+    items_num number(5) primary key,
+    main_category_num number(5),
+    name varchar2(30),
+    price number(15),
+    info varchar2(100),
+    item_date varchar2(20),
+    CONSTRAINT items_main_category_FK 
+    FOREIGN KEY(main_category_num)
+         REFERENCES main_category(main_category_num)
+);
+
+create table cart
+(
+    cart_num number(5) primary key,
+    items_num number(5),
+    id varchar2(20),
+    count number(5),
+    CONSTRAINT cart_items_FK FOREIGN KEY(items_num)
+         REFERENCES items(items_num),
+    CONSTRAINT cart_member_FK FOREIGN KEY(id)
+         REFERENCES member(id)
+);
+
+create table items_img
+(
+    items_img_num number(5) primary key,
+    items_num number(5),
+    file_name varchar2(50),
+    file_type varchar2(50),
+    CONSTRAINT items_img_items_FK FOREIGN KEY(items_num)
+         REFERENCES items(items_num)
+);
+
+create table detail_img
+(
+    detail_img_num number(5) primary key,
+    items_img_num number(5),
+    file_name varchar2(50),
+    file_type varchar2(50),
+    CONSTRAINT detail_img_FK FOREIGN KEY(items_img_num)
+         REFERENCES items_img(items_img_num)
+);
+
+create table item_option
+(
+    option_num number(5) primary key,
+    items_num number(5),
+    item_size varchar2(10),
+    CONSTRAINT item_option_FK FOREIGN KEY(items_num)
+         REFERENCES items(items_num)
+);
+create table sub_option
+(
+    sub_option_num number(5) primary key,
+    option_num number(5),
+    color varchar2(15),
+    count number(10),
+    CONSTRAINT sub_option_FK FOREIGN KEY(option_num)
+         REFERENCES item_option(option_num)
+);
+
+create table orders
+(
+    orders_num number(5) primary key,
+    cash_num number(5),
+    id varchar2(20),
+    name varchar2(20),
+    addr varchar2(50),
+    phone number(11),
+    message varchar2(30),
+    cash number(15),
+    point number(15),
+    order_date varchar2(20),
+    Progressing varchar2(15),
+    CONSTRAINT orders_member_FK FOREIGN KEY(id)
+         REFERENCES member(id),
+    CONSTRAINT orders_cash_FK FOREIGN KEY(cash_num)
+         REFERENCES cash(cash_num)
+);
+
+create table orders_detail
+(  
+    detail_num number(5) primary key,
+    orders_num number(5),
+    option_num number(5),
+    count number(5),
+    CONSTRAINT orders_detail_FK_1 
+    FOREIGN KEY(orders_num)
+         REFERENCES orders(orders_num),
+    CONSTRAINT orders_detail_FK_2 
+    FOREIGN KEY(option_num)
+         REFERENCES item_option(option_num)
+);
+
+create table review
+(
+    review_num number(5) primary key,
+    items_num number(5),
+    id varchar2(20),
+    title varchar2(50),
+    content varchar2(150),
+    CONSTRAINT review_member_FK
+    FOREIGN KEY(id)
+         REFERENCES member(id),
+    CONSTRAINT review_items_FK 
+    FOREIGN KEY(items_num)
+         REFERENCES items(items_num)
+);
+
+create table review_comment
+(
+    comm_num number(5) primary key,
+    review_num number(5),
+    id varchar2(20),
+    title varchar2(50),
+    content varchar2(150),
+    CONSTRAINT review_comment_FK_1 
+    FOREIGN KEY(review_num)
+         REFERENCES review(review_num),
+    CONSTRAINT review_comment_FK_2
+    FOREIGN KEY(id)
+         REFERENCES member(id)
+);
+
+create table notice
+(
+    notice_num number(5) primary key,
+    id varchar2(20),
+    title varchar2(50),
+    content varchar2(150),
+    CONSTRAINT notice_member_FK FOREIGN KEY(id)
+         REFERENCES member(id)
+);
+
+create table review_img
+(
+    re_img_num number(5) primary key,
+    review_num number(5),
+    file_name varchar2(50),
+    file_type varchar2(50),
+    CONSTRAINT review_img_review_FK FOREIGN KEY(review_num)
+         REFERENCES review(review_num)
+);
+
+create SEQUENCE pre_category_seq;
+create SEQUENCE main_category_seq;
+create SEQUENCE items_seq;
+create SEQUENCE review_seq;
+create SEQUENCE review_img_seq;
+create SEQUENCE review_comment_seq;
+create SEQUENCE cart_seq;
+create SEQUENCE orders_seq;
+create SEQUENCE items_img_seq;
+create SEQUENCE detail_img_seq;
+create SEQUENCE order_detail_seq;
+create SEQUENCE item_option_seq;
+create SEQUENCE sub_option_seq;
+create SEQUENCE notice_seq;

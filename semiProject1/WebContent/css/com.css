@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+/* 공통부분 */
+body {padding: 50px;}
+body,
+h1, h2, h3, h4, h5, h6, table,
+pre, xmp, plaintext, listing,
+input, textarea, select, button, a {
+    font-size: 12px;
+    color: #1c1c1c;
+    line-height: 1.25;
+    font-family: "Roboto", "Noto Sans", sans-serif;
+}
+img, fieldset,button {
+    border:0 none;
+}
+li {
+    list-style: none;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    border-spacing: 2px;
+    border-color: grey;
+}
+button {
+    overflow: hidden;
+    cursor: pointer;
+}
+
+button, input, select, textarea, a {
+    vertical-align: middle;
+}
+input:focus {
+    outline: none;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    word-wrap: break-word;
+    word-break: keep-all;
+}
+/* 공통부분 종료 */
+
+/* 상세품목페이지 css */
+.main_div {position: absolute; width: 1200px; height: 1500px; scroll-margin-bottom: inherit; top:10%; left: 19%;}
+.detail_main { padding: 0 0 0 395px; width: 962px; box-sizing:border-box;}
+.detail_main .img {position: absolute; margin:50px 0 0 0; left: 20px; top: 0px;}
+.detail_main .img > img {width: 368px; height: 450px; border:1px solid #e8e8e8;}
+.detail_main h2 {font-size: 20px; color:black; line-height: 26px;}
+.detail_main h4 {font-size:8px;}
+.detail_main h5{font-size:8px; border-bottom: 2px solid gray;}
+.detail_main{margin-left: 80px;}
+.detail_main table tr td{border:1px solid gray;}
+.detail_main table tr th{border:1px solid gray;}
+.detail_main table th,
+.detail_main table td {padding: 14px 0; font-size: 14px; color: #444;}
+.detail_main table th {font-size: 15px; color: #444; text-align: left;}
+.detail_main table td.total {font-size: 22px; }
+.detail_main table td.total b {font-size: 22px; }
+.detail_main table td.price {font-size: 19px; columns: #0a56a9;}
+.detail_main table .length {position: relative; width: 71px; height: 32px; border:1px solid gray;}
+.detail_main table .length input {width: 44px; height: 30px; border:none; border-right: 1px solid #6c6c6c;}
+.detail_main table .length a {overflow: hidden; position: absolute; right: 0; width: 26px; height: 16px; color: transparent;}
+.detail_main table .length a:nth-of-type(1) {top: 0; background: url(images/up.jpg) no-repeat center;}
+.detail_main table .length a:nth-of-type(2) {bottom: 0; background: url(images/down.jpg) no-repeat center; border-top: 1px solid #c6c6c6;}
+.detail_main table select {width: 100%; border: 1px solid #c6c6c6; box-sizing: border-box; appearance: none;
+	 -webkit-appearance: none; -moz-appearance: none; background: url(images/down.jpg) no-repeat right 1px center;}
+.detail_main table select::-ms-expand {display: none;}
+.detail_main .btns { text-align: center; padding: 20px 0 0; padding-left: 50px;}
+.detail_main .btns > a {display: inline-block; font-size: 16px; color: #fff; border-radius: 2px; line-height: 42px; text-decoration: none;}
+.detail_main .btns > a.btnbuy {background: black; width: 260px; height: 42px;}
+.detail_main .btns > a.btncart {background: black; width: 80px; height: 42px; }
+.detail_main .fit_main .fit_title{align:center; margin: 25px;}
+
+
+/* 상세품목페이지 css 종료*/
+
+/* 상품구매 페이지 css*/
+
+#order {position: absolute; width: 1200px; height: 1500px; top:10%; left: 15%;}
+#order h3 { position: relative; margin-top: 40px; padding-bottom:10px; font-size:18px; color: #202020; font-weight:bold; line-height:18px }
+#order h3 label { position: absolute; bottom: 0; right: 0; font-size: 12px; font-weight: normal; letter-spacing: 0; }
+#order #paybtns { margin-top: 40px; text-align: center }
+#order #paybtns { width:162px; height:48px; font-size:16px; line-height:48px }
+#order .tbl-order { position: relative; border-top:1px solid #000}
+#order .tbl-order thead th { padding:15px 5px; font-size:13px; color:#101010; font-weight:normal; border-bottom:1px solid #e9e9e9; background:#f7f7f7 }
+#order .tbl-order thead td { background:#f7f7f7 }
+#order .tbl-order tbody th { border-bottom:1px solid #e8e8e8 }
+#order .tbl-order tbody th span { font-size: 12px; font-weight: normal; }
+#order .tbl-order tbody td { padding:10px 0; border-bottom:1px solid #e9e9e9 }
+#order .tbl-order thead th { padding:15px 5px; font-size:13px; color:#101010; font-weight:normal; border-bottom:1px solid #e9e9e9; background:#f7f7f7 }
+#order .tbl-order thead td { background:#f7f7f7 }
+#order .tot-order th, 
+#order .tot-order td { padding: 25px 0 25px 10px; border:0 none !important; text-align:left !important; background:#ececec !important }
+#order .tot-order td { color: #777; }
+#order #paybtns{ text-align: center; padding: 20px 0 0; padding-left: 350px;}
+#order .page-body .tbl-order tr th{font-size:13px;}
+#order .page-body .tbl-order tr td{font-size:13px;}
+#content { position: relative }
+#content { min-height:400px }
