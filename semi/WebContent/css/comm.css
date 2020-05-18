@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/*전체적인 크기 */
+#wrap {
+	width: 1400px;
+	height: 4000px;
+	margin: auto;
+}
+li {
+    list-style: none;
+}
+button {
+    overflow: hidden;
+    cursor: pointer;
+}
+input:focus {
+    outline: none;
+}
+#header {
+	width: 100%;
+	height: 8%;
+}
+
+#main {
+	width: 100%;
+	height: 85%;
+}
+
+#bottom {
+	width: 100%;
+	height: 7%;
+}
+/* 공통부분 종료 */
+
+/* header  */
+.header_top_wrap {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	background-color: white;
+	width: 100%;
+	height: 15%;
+}
+
+.header_top {
+	width: 100%;
+	height: 100%;
+}
+
+.header_top>.right {
+	float: right;
+	margin-right: 10px;
+}
+
+.header_top>.right ul li a{
+	font-size:12px;
+	color:black;
+	text-decoration: none;
+}
+
+.header_top>.left {
+	float: left;
+}
+
+.header_top>.left ul li a{
+	font-size:12px;
+	color:black;
+	text-decoration: none;
+}
+
+.left>ul>li {
+	display: inline-block;
+	width: 80px;
+	list-style: none;
+}
+
+.right>ul>li {
+	display: inline-block;
+	width: 80px;
+	list-style: none;
+}
+
+.header_mid_wrap {
+	border-bottom: 1px solid black;
+	width: 100%;
+	height: 70%;
+	padding-bottom: 10px;
+}
+
+.logo_img {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.logo_img>a>img {
+	width: 200px;
+	height: auto;
+}
+
+#product_wrap>.catetip {
+	text-align: center;
+}
+
+/* main */
+
+
+
+/* bot */
+
+.bot_inner{
+	border-top:3px solid black;
+	width: 90%;
+    margin-bottom: 10px;
+}
+
+.bot_inner > .bot_cs{
+	float:left;
+	width:25%;
+}
+
+.bot_cs .tit{
+	font-size:13px;
+	color:gray;
+}
+.bot_cs .tit{
+	font-size:13px;
+	color:gray;
+}
+.bot_cs .time{
+	font-size:13px;
+	color:gray;
+}
+
+.bot_inner > .bot_bank{
+	float:left;
+	width:25%;
+}
+.bot_bank .bank{
+	font-size:13px;
+	color:gray;
+}
+
+.bot_bank .tit{
+	font-size:13px;
+	color:gray;
+}
+.bot_inner > .bot_about{
+	float:left;
+	width:25%;
+}
+
+.bot_about .info{
+	font-size:13px;
+	color:gray;
+}
+
+.bot_inner > .bot_sns{
+	float:left;
+	width:25%;
+}
